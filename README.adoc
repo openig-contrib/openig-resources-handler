@@ -1,0 +1,73 @@
+////
+Copyright 2016 ForgeRock AS.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+////
+
+= Resources Handler
+
+Serves static resources (html, images, css, ...) from a set of configurable directories.
+
+If requests includes a `If-Modified-Since` header and the resource is found, then a freshness test is performed,
+and a `304 Not Modified` status is returned.
+
+Only `GET` requests are processed, others are rejected with `405 Method Not Allowed` status code.
+
+ * Version: 1.0
+ * License: Apache Software License 2.0
+ * Authors: Guillaume Sauthier
+
+== Usage
+
+----
+{
+  "name": "ResourcesHandler",
+  "type": "ResourcesHandler",
+  "config": {
+    "directories": [
+      "/Users/guillaume/public",
+      "${system['user.home']}/.openig/static}"
+    ]
+  }
+}
+----
+
+== Build
+
+----
+>$ gradle clean build
+   :clean
+   :compileJava UP-TO-DATE
+   :compileGroovy
+   :processResources
+   :classes
+   :jar
+   :assemble
+   :compileTestJava UP-TO-DATE
+   :compileTestGroovy
+   :processTestResources UP-TO-DATE
+   :testClasses
+   :test
+   :check
+   :build
+
+   BUILD SUCCESSFUL
+
+Total time: 7.576 secs
+----
+
+Get your artifact from `build/libs/`.
+
+= Disclaimer
+
+This plugin is not supported by ForgeRock AS.
